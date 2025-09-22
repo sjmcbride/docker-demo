@@ -29,7 +29,7 @@ echo "<h3>3. Database Connection Tests</h3>";
 $configs = [
     ['host' => 'postgres', 'user' => 'postgres', 'pass' => 'secure_password_123', 'db' => 'smclab_auth'],
     ['host' => 'postgres', 'user' => 'postgres', 'pass' => 'secure_password_123', 'db' => 'postgres'],
-    ['host' => 'localhost', 'user' => 'postgres', 'pass' => 'secure_password_123', 'db' => 'smclab_auth'],
+    ['host' => 'postgres', 'user' => 'postgres', 'pass' => '', 'db' => 'smclab_auth'], // Try without password
 ];
 
 foreach ($configs as $i => $config) {
