@@ -1,15 +1,27 @@
+<?php
+require_once 'config.php';
+
+if (isset($_GET['logout'])) {
+    logoutUser();
+}
+
+if (!isLoggedIn()) {
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo3 - SMCLab.net</title>
+    <title>Demo1 - SMCLab.net</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             min-height: 100vh;
             display: flex;
@@ -36,11 +48,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>demo3.smclab.net</h1>
-        <p>Welcome to Demo Site #3</p>
-        <p>🌐 https://demo3.smclab.net</p>
+        <h1>demo1.smclab.net</h1>
+        <p>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
+        <p>🌐 https://demo1.smclab.net</p>
         <p>Secured with SSL via nginx-proxy</p>
-        <p>Static HTML served by nginx in Docker container</p>
+        <p>PHP + PostgreSQL authentication system</p>
+        <p><a href="?logout=1" style="color: #fff; text-decoration: underline;">Logout</a></p>
     </div>
 </body>
 </html>

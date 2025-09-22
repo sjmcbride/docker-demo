@@ -1,16 +1,28 @@
+<?php
+require_once 'config.php';
+
+if (isset($_GET['logout'])) {
+    logoutUser();
+}
+
+if (!isLoggedIn()) {
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo4 - SMCLab.net</title>
+    <title>Demo1 - SMCLab.net</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -19,31 +31,29 @@
         }
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            color: #2c3e50;
         }
         p {
             font-size: 1.2em;
             margin-bottom: 10px;
-            color: #34495e;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>demo4.smclab.net</h1>
-        <p>Welcome to Demo Site #4</p>
-        <p>🌐 https://demo4.smclab.net</p>
+        <h1>demo2.smclab.net</h1>
+        <p>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
+        <p>🌐 https://demo2.smclab.net</p>
         <p>Secured with SSL via nginx-proxy</p>
-        <p>Static HTML served by nginx in Docker container</p>
+        <p>PHP + PostgreSQL authentication system</p>
+        <p><a href="?logout=1" style="color: #fff; text-decoration: underline;">Logout</a></p>
     </div>
 </body>
 </html>
