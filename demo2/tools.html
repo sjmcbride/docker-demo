@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - Demo2 SMCLab.net</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Demo2</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="tools.html" class="active">Tools</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>🛠️ Development Tools</h1>
+
+        <div class="feature-box">
+            <h2>🐳 Container Management</h2>
+            <div class="dashboard">
+                <div class="dashboard-card" onclick="executeCommand('docker ps')">
+                    <span class="dashboard-icon">📋</span>
+                    <h3>Container Status</h3>
+                    <p>List all running containers and their health status</p>
+                </div>
+                <div class="dashboard-card" onclick="executeCommand('docker stats')">
+                    <span class="dashboard-icon">📊</span>
+                    <h3>Resource Usage</h3>
+                    <p>Real-time container resource consumption metrics</p>
+                </div>
+                <div class="dashboard-card" onclick="executeCommand('docker logs')">
+                    <span class="dashboard-icon">📝</span>
+                    <h3>Container Logs</h3>
+                    <p>View and analyze container log outputs</p>
+                </div>
+                <div class="dashboard-card" onclick="executeCommand('docker network ls')">
+                    <span class="dashboard-icon">🌐</span>
+                    <h3>Network Status</h3>
+                    <p>Inspect Docker networks and connectivity</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2>💻 Command Center</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('docker')">Docker</button>
+                <button class="tab" onclick="showTab('database')">Database</button>
+                <button class="tab" onclick="showTab('networking')">Network</button>
+                <button class="tab" onclick="showTab('monitoring')">Monitoring</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="docker" class="tab-pane active">
+                    <h3>Docker Management Commands</h3>
+                    <div class="advanced-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dockerCommand">Select Command:</label>
+                                <select id="dockerCommand" onchange="updateCommandPreview()">
+                                    <option value="docker-compose ps">Show services status</option>
+                                    <option value="docker-compose logs -f">Follow logs in real-time</option>
+                                    <option value="docker-compose restart">Restart all services</option>
+                                    <option value="docker system prune">Clean up unused resources</option>
+                                    <option value="docker images">List all images</option>
+                                    <option value="docker volume ls">List all volumes</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="serviceFilter">Service Filter (optional):</label>
+                                <select id="serviceFilter">
+                                    <option value="">All services</option>
+                                    <option value="traefik">Traefik</option>
+                                    <option value="postgres">PostgreSQL</option>
+                                    <option value="demo1">Demo1</option>
+                                    <option value="demo2">Demo2</option>
+                                    <option value="demo3">Demo3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="commandPreview">Command Preview:</label>
+                            <input type="text" id="commandPreview" value="docker-compose ps" readonly>
+                        </div>
+                        <button class="btn btn-primary" onclick="executeDockerCommand()">Execute Command</button>
+                    </div>
+                </div>
+
+                <div id="database" class="tab-pane">
+                    <h3>Database Operations</h3>
+                    <div class="advanced-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dbOperation">Database Operation:</label>
+                                <select id="dbOperation">
+                                    <option value="status">Connection Status</option>
+                                    <option value="tables">List Tables</option>
+                                    <option value="backup">Create Backup</option>
+                                    <option value="restore">Restore Backup</option>
+                                    <option value="vacuum">Optimize Database</option>
+                                    <option value="users">List Users</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dbQuery">Custom SQL Query (optional):</label>
+                                <textarea id="dbQuery" rows="3" placeholder="SELECT * FROM demo_sites LIMIT 10;"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="executeDatabaseOperation()">Execute Operation</button>
+                    </div>
+
+                    <div class="dashboard">
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">📊</span>
+                            <h4>Database Size</h4>
+                            <p><strong>2.3 GB</strong><br>↗️ +45MB this week</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🔗</span>
+                            <h4>Active Connections</h4>
+                            <p><strong>12/100</strong><br>Optimal utilization</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="networking" class="tab-pane">
+                    <h3>Network Diagnostics</h3>
+                    <div class="advanced-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="networkTest">Network Test:</label>
+                                <select id="networkTest">
+                                    <option value="ping">Ping Test</option>
+                                    <option value="traceroute">Trace Route</option>
+                                    <option value="dns">DNS Lookup</option>
+                                    <option value="ssl">SSL Certificate Check</option>
+                                    <option value="ports">Port Scan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="targetHost">Target Host:</label>
+                                <input type="text" id="targetHost" value="demo1.smclab.net" placeholder="hostname or IP">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="executeNetworkTest()">Run Test</button>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Network Status</h4>
+                            <p><strong>Web Network:</strong> 3 containers connected</p>
+                            <p><strong>Backend Network:</strong> 4 containers connected</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>SSL Certificates</h4>
+                            <p><strong>Status:</strong> Valid for all domains</p>
+                            <p><strong>Expiry:</strong> 60+ days remaining</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="monitoring" class="tab-pane">
+                    <h3>System Monitoring Tools</h3>
+                    <div class="dashboard">
+                        <div class="dashboard-card" onclick="openMonitoringTool('htop')">
+                            <span class="dashboard-icon">🖥️</span>
+                            <h4>Process Monitor</h4>
+                            <p>Real-time process and resource monitoring</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openMonitoringTool('iotop')">
+                            <span class="dashboard-icon">💾</span>
+                            <h4>Disk I/O Monitor</h4>
+                            <p>Monitor disk read/write operations</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openMonitoringTool('netstat')">
+                            <span class="dashboard-icon">🌐</span>
+                            <h4>Network Connections</h4>
+                            <p>View active network connections</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openMonitoringTool('lsof')">
+                            <span class="dashboard-icon">📁</span>
+                            <h4>Open Files</h4>
+                            <p>List open files and processes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>📊 Real-time Monitoring</h2>
+            <div id="commandOutput" class="chart-container">
+                <h3>Command Output</h3>
+                <div id="terminalOutput" style="background: #000; color: #0f0; padding: 1rem; border-radius: 8px; font-family: monospace; min-height: 200px; white-space: pre-wrap;">
+Welcome to SMCLab Demo2 Command Center
+======================================
+
+System Status: All containers running normally
+Database: Connected (12 active connections)
+SSL Certificates: Valid and auto-renewing
+Load Balancer: Distributing traffic optimally
+
+Ready for commands...
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>🔧 Maintenance Tools</h2>
+            <div class="advanced-form">
+                <h3>Scheduled Maintenance</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="maintenanceType">Maintenance Type:</label>
+                        <select id="maintenanceType">
+                            <option value="backup">Database Backup</option>
+                            <option value="cleanup">System Cleanup</option>
+                            <option value="update">Container Updates</option>
+                            <option value="restart">Rolling Restart</option>
+                            <option value="ssl">SSL Renewal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleTime">Schedule Time:</label>
+                        <input type="datetime-local" id="scheduleTime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="maintenanceNotes">Maintenance Notes:</label>
+                    <textarea id="maintenanceNotes" rows="3" placeholder="Optional notes about this maintenance operation..."></textarea>
+                </div>
+                <button class="btn btn-accent" onclick="scheduleMaintenance()">Schedule Maintenance</button>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Last Database Backup</h4>
+                    <p><strong>Time:</strong> 2 hours ago | <strong>Size:</strong> 2.3GB</p>
+                    <p>Automatic backup completed successfully, stored in persistent volume.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Container Health Check</h4>
+                    <p><strong>Time:</strong> 5 minutes ago | <strong>Status:</strong> All Healthy</p>
+                    <p>All containers passing health checks, no issues detected.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>SSL Certificate Validation</h4>
+                    <p><strong>Time:</strong> 1 hour ago | <strong>Status:</strong> Valid</p>
+                    <p>All SSL certificates valid and properly configured.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>🚀 Quick Actions</h2>
+            <div class="dashboard">
+                <div class="dashboard-card" onclick="quickAction('restart')">
+                    <span class="dashboard-icon">🔄</span>
+                    <h3>Restart Stack</h3>
+                    <p>Graceful restart of all services</p>
+                </div>
+                <div class="dashboard-card" onclick="quickAction('backup')">
+                    <span class="dashboard-icon">💾</span>
+                    <h3>Emergency Backup</h3>
+                    <p>Create immediate database backup</p>
+                </div>
+                <div class="dashboard-card" onclick="quickAction('health')">
+                    <span class="dashboard-icon">🏥</span>
+                    <h3>Health Check</h3>
+                    <p>Run comprehensive system health check</p>
+                </div>
+                <div class="dashboard-card" onclick="quickAction('logs')">
+                    <span class="dashboard-icon">📜</span>
+                    <h3>Export Logs</h3>
+                    <p>Download recent system logs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="tools.js"></script>
+</body>
+</html>

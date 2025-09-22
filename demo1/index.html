@@ -4,68 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo1 - SMCLab.net</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        h1 { color: #fff; text-align: center; }
-        .info-box {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        .db-status {
-            background: rgba(0, 255, 0, 0.2);
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Demo1</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <h1>🚀 Demo1 Website</h1>
+
         <div class="info-box">
             <h2>Welcome to Demo1.smclab.net</h2>
-            <p>This is the first demo website in our Docker stack. It's running behind Traefik with automatic SSL certificates.</p>
+            <p>This is the first demo website in our Docker stack. It's running behind Traefik with automatic SSL certificates and demonstrates modern containerized web application architecture.</p>
 
-            <h3>Stack Information:</h3>
-            <ul>
-                <li><strong>Proxy:</strong> Traefik v3.0 with Let's Encrypt SSL</li>
-                <li><strong>Web Server:</strong> Nginx (Alpine)</li>
-                <li><strong>Database:</strong> PostgreSQL 15</li>
-                <li><strong>Domain:</strong> demo1.smclab.net</li>
-            </ul>
+            <h3>🎯 Core Features:</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔒 Automatic SSL</h4>
+                    <p>Let's Encrypt certificates with auto-renewal</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🚀 Container Ready</h4>
+                    <p>Optimized Docker containers with Alpine Linux</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌐 Load Balanced</h4>
+                    <p>Traefik reverse proxy with service discovery</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📊 Database Shared</h4>
+                    <p>PostgreSQL connection across all services</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>⚙️ Technical Stack</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Frontend:</strong> HTML5, CSS3, JavaScript (Vanilla)
+                </div>
+                <div class="tech-item">
+                    <strong>Web Server:</strong> Nginx (Alpine Linux)
+                </div>
+                <div class="tech-item">
+                    <strong>Proxy:</strong> Traefik v3.0 with automatic service discovery
+                </div>
+                <div class="tech-item">
+                    <strong>Database:</strong> PostgreSQL 15 with persistent storage
+                </div>
+                <div class="tech-item">
+                    <strong>SSL:</strong> Let's Encrypt automatic certificate management
+                </div>
+                <div class="tech-item">
+                    <strong>Orchestration:</strong> Docker Compose with multi-network architecture
+                </div>
+            </div>
         </div>
 
         <div class="db-status">
             <h3>📊 Database Connection</h3>
             <p>Connected to shared PostgreSQL database: <strong>demo_db</strong></p>
-            <p>Database contains sample data for all three demo sites.</p>
+            <p>Database contains sample data for all three demo sites with visitor tracking and analytics.</p>
+            <div class="db-stats">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Connected Sites</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Database Tables</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+            </div>
         </div>
 
         <div class="info-box">
-            <h3>🔗 Other Demo Sites</h3>
+            <h3>🌟 Live Demo Features</h3>
             <ul>
-                <li><a href="https://demo2.smclab.net" style="color: #fff;">Demo2.smclab.net</a></li>
-                <li><a href="https://demo3.smclab.net" style="color: #fff;">Demo3.smclab.net</a></li>
-                <li><a href="https://traefik.smclab.net" style="color: #fff;">Traefik Dashboard</a></li>
+                <li>✅ Responsive design optimized for all devices</li>
+                <li>✅ Progressive enhancement with JavaScript</li>
+                <li>✅ Form handling with client-side validation</li>
+                <li>✅ Database integration simulation</li>
+                <li>✅ Cross-site navigation and linking</li>
+                <li>✅ Modern CSS with gradients and animations</li>
             </ul>
         </div>
+
+        <div class="info-box">
+            <h3>🔗 Explore the Stack</h3>
+            <div class="button-group">
+                <a href="about.html" class="btn btn-primary">Learn More</a>
+                <a href="services.html" class="btn btn-secondary">Our Services</a>
+                <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+            </div>
+
+            <h4 style="margin-top: 2rem;">Other Demo Sites:</h4>
+            <div class="button-group">
+                <a href="https://demo2.smclab.net" class="btn btn-accent">Visit Demo2</a>
+                <a href="https://demo3.smclab.net" class="btn btn-accent">Visit Demo3</a>
+                <a href="https://traefik.smclab.net" class="btn btn-outline">Traefik Dashboard</a>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h3>🚀 Ready to Containerize Your Apps?</h3>
+            <p>Join thousands of developers who have modernized their infrastructure with our Docker solutions.</p>
+            <a href="contact.html" class="btn btn-primary">Start Your Journey</a>
+        </div>
     </div>
+
+    <script src="contact.js"></script>
 </body>
 </html>

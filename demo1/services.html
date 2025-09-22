@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Demo1 SMCLab.net</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Demo1</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>🛠️ Our Services</h1>
+
+        <div class="service-section">
+            <h2>Container Orchestration</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🐳</div>
+                    <h3>Docker Containerization</h3>
+                    <p>Full application containerization using Docker with optimized Alpine Linux base images for minimal resource footprint.</p>
+                    <ul>
+                        <li>Multi-stage builds</li>
+                        <li>Security scanning</li>
+                        <li>Image optimization</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Service Discovery</h3>
+                    <p>Automatic service discovery and load balancing with Traefik proxy, eliminating manual configuration.</p>
+                    <ul>
+                        <li>Dynamic routing</li>
+                        <li>Health checks</li>
+                        <li>Load balancing</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>SSL Management</h3>
+                    <p>Automated SSL/TLS certificate generation, deployment, and renewal using Let's Encrypt integration.</p>
+                    <ul>
+                        <li>Auto-renewal</li>
+                        <li>TLS 1.3 support</li>
+                        <li>HSTS headers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>Database Solutions</h2>
+            <div class="db-stats">
+                <div class="stat-card">
+                    <h3>PostgreSQL 15</h3>
+                    <p>Enterprise-grade database with ACID compliance and advanced indexing.</p>
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Connection Pool</h3>
+                    <p>Shared database connections across all microservices for optimal resource usage.</p>
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Concurrent Users</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Data Persistence</h3>
+                    <p>Persistent volumes ensure data survives container restarts and updates.</p>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Availability</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-section">
+            <h2>Monitoring & Observability</h2>
+            <div class="monitoring-features">
+                <div class="feature-item">
+                    <h4>📊 Real-time Metrics</h4>
+                    <p>Live monitoring of container health, resource usage, and application performance.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📝 Centralized Logging</h4>
+                    <p>Aggregated logs from all services with structured JSON output and searchable history.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🚨 Alert Management</h4>
+                    <p>Proactive alerting for service failures, resource exhaustion, and security events.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 Distributed Tracing</h4>
+                    <p>End-to-end request tracing across microservices for performance optimization.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-section">
+            <h2>Service Tiers</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card basic">
+                    <h3>Basic</h3>
+                    <div class="price">Free</div>
+                    <ul>
+                        <li>Single container deployment</li>
+                        <li>Basic SSL certificate</li>
+                        <li>Community support</li>
+                        <li>Standard monitoring</li>
+                    </ul>
+                    <button class="btn btn-outline">Get Started</button>
+                </div>
+
+                <div class="pricing-card pro">
+                    <h3>Professional</h3>
+                    <div class="price">$29<span>/month</span></div>
+                    <ul>
+                        <li>Multi-container orchestration</li>
+                        <li>Advanced SSL management</li>
+                        <li>Priority support</li>
+                        <li>Enhanced monitoring</li>
+                        <li>Automatic backups</li>
+                    </ul>
+                    <button class="btn btn-primary">Choose Pro</button>
+                </div>
+
+                <div class="pricing-card enterprise">
+                    <h3>Enterprise</h3>
+                    <div class="price">$99<span>/month</span></div>
+                    <ul>
+                        <li>Custom container solutions</li>
+                        <li>Enterprise SSL certificates</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Advanced analytics</li>
+                        <li>SLA guarantees</li>
+                        <li>Custom integrations</li>
+                    </ul>
+                    <button class="btn btn-accent">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

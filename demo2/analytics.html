@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Demo2 SMCLab.net</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Demo2</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="analytics.html" class="active">Analytics</a></li>
+                <li><a href="tools.html">Tools</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>📈 Analytics & Insights</h1>
+
+        <div class="feature-box">
+            <h2>🎯 Key Performance Indicators</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">98.7%</div>
+                    <div class="stat-label">Availability</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 98.7%;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2.3s</div>
+                    <div class="stat-label">Avg Load Time</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15,429</div>
+                    <div class="stat-label">Page Views</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 92%;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">User Satisfaction</div>
+                    <div class="stat-progress">
+                        <div class="stat-progress-bar" style="width: 87%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2>📊 Traffic Analytics</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('visitors')">Visitors</button>
+                <button class="tab" onclick="showTab('geography')">Geography</button>
+                <button class="tab" onclick="showTab('devices')">Devices</button>
+                <button class="tab" onclick="showTab('sources')">Traffic Sources</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="visitors" class="tab-pane active">
+                    <h3>Visitor Trends (Last 30 Days)</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-bar" style="height: 45%;" data-value="450"></div>
+                            <div class="chart-bar" style="height: 60%;" data-value="600"></div>
+                            <div class="chart-bar" style="height: 35%;" data-value="350"></div>
+                            <div class="chart-bar" style="height: 80%;" data-value="800"></div>
+                            <div class="chart-bar" style="height: 55%;" data-value="550"></div>
+                            <div class="chart-bar" style="height: 70%;" data-value="700"></div>
+                            <div class="chart-bar" style="height: 65%;" data-value="650"></div>
+                            <div class="chart-bar" style="height: 90%;" data-value="900"></div>
+                            <div class="chart-bar" style="height: 75%;" data-value="750"></div>
+                            <div class="chart-bar" style="height: 85%;" data-value="850"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard">
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">👥</span>
+                            <h4>Unique Visitors</h4>
+                            <p><strong>12,847</strong> this month<br>↗️ +23% from last month</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">📄</span>
+                            <h4>Page Views</h4>
+                            <p><strong>45,291</strong> this month<br>↗️ +18% from last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="geography" class="tab-pane">
+                    <h3>Geographic Distribution</h3>
+                    <div class="dashboard">
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🇺🇸</span>
+                            <h4>United States</h4>
+                            <p><strong>45.2%</strong> of traffic<br>6,547 visitors</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🇨🇦</span>
+                            <h4>Canada</h4>
+                            <p><strong>18.7%</strong> of traffic<br>2,402 visitors</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🇬🇧</span>
+                            <h4>United Kingdom</h4>
+                            <p><strong>12.1%</strong> of traffic<br>1,554 visitors</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🇩🇪</span>
+                            <h4>Germany</h4>
+                            <p><strong>8.9%</strong> of traffic<br>1,144 visitors</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="devices" class="tab-pane">
+                    <h3>Device Analytics</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-bar" style="height: 65%;" data-value="Desktop"></div>
+                            <div class="chart-bar" style="height: 80%;" data-value="Mobile"></div>
+                            <div class="chart-bar" style="height: 25%;" data-value="Tablet"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard">
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">📱</span>
+                            <h4>Mobile Devices</h4>
+                            <p><strong>68.3%</strong> of visits<br>Avg session: 3m 42s</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">💻</span>
+                            <h4>Desktop</h4>
+                            <p><strong>26.8%</strong> of visits<br>Avg session: 5m 18s</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">📟</span>
+                            <h4>Tablet</h4>
+                            <p><strong>4.9%</strong> of visits<br>Avg session: 4m 07s</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sources" class="tab-pane">
+                    <h3>Traffic Sources</h3>
+                    <div class="dashboard">
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🔍</span>
+                            <h4>Search Engines</h4>
+                            <p><strong>42.1%</strong> of traffic<br>Google, Bing, DuckDuckGo</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">🔗</span>
+                            <h4>Direct Traffic</h4>
+                            <p><strong>28.7%</strong> of traffic<br>Bookmarks and URL entries</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">📱</span>
+                            <h4>Social Media</h4>
+                            <p><strong>16.4%</strong> of traffic<br>LinkedIn, Twitter, Reddit</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <span class="dashboard-icon">📧</span>
+                            <h4>Email Campaigns</h4>
+                            <p><strong>12.8%</strong> of traffic<br>Newsletter and promotions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>🚀 Performance Metrics</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Container Startup Time</h4>
+                    <p><strong>Average:</strong> 2.3 seconds | <strong>Target:</strong> < 5 seconds</p>
+                    <p>Optimized Docker images with Alpine Linux ensuring fast cold starts.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Database Query Performance</h4>
+                    <p><strong>Average:</strong> 45ms | <strong>99th percentile:</strong> 180ms</p>
+                    <p>PostgreSQL with optimized indexes and connection pooling.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>SSL Certificate Renewal</h4>
+                    <p><strong>Last Renewal:</strong> 45 days ago | <strong>Next:</strong> In 45 days</p>
+                    <p>Automatic Let's Encrypt certificate management with zero downtime.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Load Balancing Efficiency</h4>
+                    <p><strong>Distribution:</strong> 98.5% even | <strong>Health Checks:</strong> Passing</p>
+                    <p>Traefik efficiently distributing traffic across service instances.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>💾 Database Analytics</h2>
+            <div class="advanced-form">
+                <h3>Database Performance Insights</h3>
+                <div class="form-row">
+                    <div class="dashboard-card">
+                        <span class="dashboard-icon">📊</span>
+                        <h4>Query Volume</h4>
+                        <p><strong>15,247</strong> queries/hour<br>Peak: 28,394 queries/hour</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="dashboard-icon">⚡</span>
+                        <h4>Cache Hit Rate</h4>
+                        <p><strong>96.3%</strong> cache efficiency<br>Reduced DB load significantly</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="dashboard-icon">🔄</span>
+                        <h4>Connection Pool</h4>
+                        <p><strong>18/100</strong> active connections<br>Optimal resource utilization</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="dashboard-icon">💾</span>
+                        <h4>Storage Usage</h4>
+                        <p><strong>2.3GB</strong> of 50GB used<br>Growth rate: +12MB/day</p>
+                    </div>
+                </div>
+
+                <h3>Top Database Tables</h3>
+                <div class="chart-container">
+                    <div class="chart">
+                        <div class="chart-bar" style="height: 85%;" data-value="visitors"></div>
+                        <div class="chart-bar" style="height: 60%;" data-value="demo_sites"></div>
+                        <div class="chart-bar" style="height: 40%;" data-value="sessions"></div>
+                        <div class="chart-bar" style="height: 25%;" data-value="analytics"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>🔒 Security Analytics</h2>
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <span class="dashboard-icon">🛡️</span>
+                    <h4>SSL Security Score</h4>
+                    <p><strong>A+</strong> rating<br>TLS 1.3, HSTS enabled</p>
+                </div>
+                <div class="dashboard-card">
+                    <span class="dashboard-icon">🚫</span>
+                    <h4>Blocked Requests</h4>
+                    <p><strong>1,247</strong> this month<br>Malicious traffic filtered</p>
+                </div>
+                <div class="dashboard-card">
+                    <span class="dashboard-icon">🔍</span>
+                    <h4>Vulnerability Scans</h4>
+                    <p><strong>0</strong> critical issues<br>Last scan: 2 hours ago</p>
+                </div>
+                <div class="dashboard-card">
+                    <span class="dashboard-icon">📝</span>
+                    <h4>Audit Logs</h4>
+                    <p><strong>98,234</strong> events logged<br>100% compliance maintained</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

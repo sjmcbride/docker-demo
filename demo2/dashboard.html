@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Demo2 SMCLab.net</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Demo2</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="tools.html">Tools</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>📊 Advanced Dashboard</h1>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="activeUsers">1,247</div>
+                <div class="stat-label">Active Users</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="--progress: 85%; width: 85%;"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number" id="totalRequests">45.2K</div>
+                <div class="stat-label">Total Requests</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="--progress: 92%; width: 92%;"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number" id="uptime">99.8%</div>
+                <div class="stat-label">System Uptime</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="--progress: 99%; width: 99%;"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-number" id="responseTime">127ms</div>
+                <div class="stat-label">Avg Response</div>
+                <div class="stat-progress">
+                    <div class="stat-progress-bar" style="--progress: 78%; width: 78%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="dashboard-card" onclick="showSystemStatus()">
+                <span class="dashboard-icon">🖥️</span>
+                <h3>System Status</h3>
+                <p>Monitor container health, resource usage, and service availability.</p>
+                <div class="status-indicator">🟢 All Systems Operational</div>
+            </div>
+
+            <div class="dashboard-card" onclick="showDatabaseMetrics()">
+                <span class="dashboard-icon">🗄️</span>
+                <h3>Database Metrics</h3>
+                <p>PostgreSQL performance, connections, and query analytics.</p>
+                <div class="status-indicator">🟢 Database Healthy</div>
+            </div>
+
+            <div class="dashboard-card" onclick="showTrafficAnalytics()">
+                <span class="dashboard-icon">📈</span>
+                <h3>Traffic Analytics</h3>
+                <p>Real-time visitor metrics, geographic distribution, and trends.</p>
+                <div class="status-indicator">📊 Live Data</div>
+            </div>
+
+            <div class="dashboard-card" onclick="showSecurityOverview()">
+                <span class="dashboard-icon">🔒</span>
+                <h3>Security Overview</h3>
+                <p>SSL certificate status, security events, and threat monitoring.</p>
+                <div class="status-indicator">🟢 Secure</div>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2>📊 Performance Charts</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('cpu')">CPU Usage</button>
+                <button class="tab" onclick="showTab('memory')">Memory</button>
+                <button class="tab" onclick="showTab('network')">Network</button>
+                <button class="tab" onclick="showTab('storage')">Storage</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="cpu" class="tab-pane active">
+                    <h3>CPU Usage Over Time</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-bar" style="height: 60%;" data-value="60%"></div>
+                            <div class="chart-bar" style="height: 75%;" data-value="75%"></div>
+                            <div class="chart-bar" style="height: 45%;" data-value="45%"></div>
+                            <div class="chart-bar" style="height: 80%;" data-value="80%"></div>
+                            <div class="chart-bar" style="height: 55%;" data-value="55%"></div>
+                            <div class="chart-bar" style="height: 70%;" data-value="70%"></div>
+                            <div class="chart-bar" style="height: 65%;" data-value="65%"></div>
+                        </div>
+                    </div>
+                    <p>Average CPU usage across all containers in the last 24 hours.</p>
+                </div>
+
+                <div id="memory" class="tab-pane">
+                    <h3>Memory Consumption</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-bar" style="height: 40%;" data-value="2.1GB"></div>
+                            <div class="chart-bar" style="height: 55%;" data-value="2.8GB"></div>
+                            <div class="chart-bar" style="height: 35%;" data-value="1.8GB"></div>
+                            <div class="chart-bar" style="height: 70%;" data-value="3.5GB"></div>
+                            <div class="chart-bar" style="height: 45%;" data-value="2.3GB"></div>
+                            <div class="chart-bar" style="height: 60%;" data-value="3.0GB"></div>
+                            <div class="chart-bar" style="height: 50%;" data-value="2.5GB"></div>
+                        </div>
+                    </div>
+                    <p>Memory usage patterns showing efficient resource allocation.</p>
+                </div>
+
+                <div id="network" class="tab-pane">
+                    <h3>Network Traffic</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-bar" style="height: 85%;" data-value="850MB"></div>
+                            <div class="chart-bar" style="height: 65%;" data-value="650MB"></div>
+                            <div class="chart-bar" style="height: 90%;" data-value="900MB"></div>
+                            <div class="chart-bar" style="height: 75%;" data-value="750MB"></div>
+                            <div class="chart-bar" style="height: 95%;" data-value="950MB"></div>
+                            <div class="chart-bar" style="height: 80%;" data-value="800MB"></div>
+                            <div class="chart-bar" style="height: 70%;" data-value="700MB"></div>
+                        </div>
+                    </div>
+                    <p>Incoming and outgoing network traffic across all services.</p>
+                </div>
+
+                <div id="storage" class="tab-pane">
+                    <h3>Storage Utilization</h3>
+                    <div class="chart-container">
+                        <div class="chart">
+                            <div class="chart-bar" style="height: 30%;" data-value="15GB"></div>
+                            <div class="chart-bar" style="height: 45%;" data-value="23GB"></div>
+                            <div class="chart-bar" style="height: 25%;" data-value="12GB"></div>
+                            <div class="chart-bar" style="height: 60%;" data-value="30GB"></div>
+                            <div class="chart-bar" style="height: 35%;" data-value="18GB"></div>
+                            <div class="chart-bar" style="height: 50%;" data-value="25GB"></div>
+                            <div class="chart-bar" style="height: 40%;" data-value="20GB"></div>
+                        </div>
+                    </div>
+                    <p>Persistent volume usage and container storage efficiency.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>🚀 Container Status</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Traefik Proxy</h4>
+                    <p><strong>Status:</strong> Running | <strong>Uptime:</strong> 15 days, 4 hours</p>
+                    <p>Handling SSL termination and load balancing for all services.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>PostgreSQL Database</h4>
+                    <p><strong>Status:</strong> Running | <strong>Connections:</strong> 12/100</p>
+                    <p>Shared database serving all demo applications with optimal performance.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Demo Applications</h4>
+                    <p><strong>Status:</strong> All Running | <strong>Instances:</strong> 3</p>
+                    <p>Demo1, Demo2, and Demo3 all operational with automatic health checks.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Health Monitoring</h4>
+                    <p><strong>Status:</strong> Active | <strong>Last Check:</strong> 30 seconds ago</p>
+                    <p>Continuous monitoring of all services with automatic alerting.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h2>⚡ Quick Actions</h2>
+            <div class="dashboard">
+                <div class="dashboard-card" onclick="restartServices()">
+                    <span class="dashboard-icon">🔄</span>
+                    <h3>Restart Services</h3>
+                    <p>Gracefully restart all containers</p>
+                </div>
+                <div class="dashboard-card" onclick="viewLogs()">
+                    <span class="dashboard-icon">📝</span>
+                    <h3>View Logs</h3>
+                    <p>Access real-time container logs</p>
+                </div>
+                <div class="dashboard-card" onclick="backupData()">
+                    <span class="dashboard-icon">💾</span>
+                    <h3>Backup Data</h3>
+                    <p>Create database backup</p>
+                </div>
+                <div class="dashboard-card" onclick="updateContainers()">
+                    <span class="dashboard-icon">⬆️</span>
+                    <h3>Update Stack</h3>
+                    <p>Pull and deploy latest images</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
