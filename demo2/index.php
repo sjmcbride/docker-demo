@@ -217,7 +217,7 @@ if (!isLoggedIn()) {
     </div>
 
     <div class="container">
-        <div class="logo"><span class="sc">SC</span></div>
+        <div class="logo"><span class="sc">SMC</span></div>
         <h1>DEMO2.SMCLAB.NET</h1>
         <p>Welcome, <span class="status"><?php echo htmlspecialchars($_SESSION['username']); ?></span></p>
         <p>🔒 Secure Connection Established</p>

@@ -1,9 +1,7 @@
 <?php
 require_once 'config.php';
 
-$error = '';
-
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -11,7 +9,7 @@ if ($_POST) {
         header('Location: index.php');
         exit;
     } else {
-        $error = 'Invalid username or password';
+        $error = 'Invalid username or password.';
     }
 }
 ?>
@@ -22,18 +20,17 @@ if ($_POST) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMC Laboratory - Chamber Two Access Portal</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Comic+Neue:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
 
         body {
-            font-family: 'Comic Neue', cursive;
+            font-family: 'Exo 2', sans-serif;
             margin: 0;
             padding: 20px;
             background:
-                radial-gradient(circle at 15% 20%, #ff6b9d 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, #4ecdc4 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, #ffe66d 0%, transparent 30%),
-                linear-gradient(135deg, #a8e6cf 0%, #88d8c0 25%, #7fcdcd 50%, #81c784 75%, #aed581 100%);
-            color: #2d3436;
+                radial-gradient(circle at 20% 30%, rgba(46, 213, 115, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(46, 213, 115, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #2c3e50 50%, #1a252f 75%, #0f1419 100%);
+            color: #ecf0f1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -41,15 +38,9 @@ if ($_POST) {
             align-items: center;
             position: relative;
             overflow: hidden;
-            animation: bubbleFloat 20s ease-in-out infinite;
         }
 
-        @keyframes bubbleFloat {
-            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%; }
-            50% { background-position: 10% 20%, 90% 80%, 60% 40%, 10% 10%; }
-        }
-
-        .lab-equipment {
+        .tech-elements {
             position: fixed;
             top: 0;
             left: 0;
@@ -59,255 +50,248 @@ if ($_POST) {
             z-index: 0;
         }
 
-        .bubble {
+        .circuit {
             position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(46, 213, 115, 0.3), transparent);
+            height: 1px;
+            animation: circuit-flow linear infinite;
+        }
+
+        .node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #2ed573, #1dd1a1);
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            animation: float-up linear infinite;
+            box-shadow: 0 0 15px rgba(46, 213, 115, 0.6);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .beaker {
+        .grid-line {
             position: absolute;
-            width: 60px;
-            height: 80px;
-            background: linear-gradient(to bottom, transparent 20%, #ff6b9d 20%, #ff6b9d 80%, #e84393 100%);
-            border: 4px solid #2d3436;
-            border-radius: 0 0 20px 20px;
-            animation: bubble-brew 3s ease-in-out infinite;
+            background: linear-gradient(to right, transparent, rgba(149, 165, 166, 0.1), transparent);
+            height: 1px;
         }
 
-        .beaker:before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 20px;
-            background: transparent;
-            border: 4px solid #2d3436;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-        }
+        .circuit1 { width: 300px; top: 15%; left: 10%; animation-duration: 8s; }
+        .circuit2 { width: 200px; top: 60%; right: 15%; animation-duration: 6s; animation-delay: 2s; }
+        .circuit3 { width: 150px; bottom: 20%; left: 20%; animation-duration: 10s; animation-delay: 4s; }
 
-        .test-tube {
-            position: absolute;
-            width: 20px;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent 30%, #4ecdc4 30%, #4ecdc4 90%, #00b894 100%);
-            border: 3px solid #2d3436;
-            border-radius: 0 0 10px 10px;
-            animation: shake 2s ease-in-out infinite;
-        }
+        .node1 { top: 20%; left: 8%; animation-delay: 0s; }
+        .node2 { top: 40%; right: 12%; animation-delay: 1s; }
+        .node3 { bottom: 30%; left: 15%; animation-delay: 2s; }
+        .node4 { top: 70%; right: 25%; animation-delay: 3s; }
 
-        .bubble1 { width: 20px; height: 20px; left: 10%; top: 100%; animation-duration: 8s; animation-delay: 0s; }
-        .bubble2 { width: 15px; height: 15px; left: 20%; top: 100%; animation-duration: 6s; animation-delay: 1s; }
-        .bubble3 { width: 25px; height: 25px; left: 80%; top: 100%; animation-duration: 10s; animation-delay: 2s; }
-        .bubble4 { width: 18px; height: 18px; left: 85%; top: 100%; animation-duration: 7s; animation-delay: 0.5s; }
-        .bubble5 { width: 22px; height: 22px; left: 15%; top: 100%; animation-duration: 9s; animation-delay: 3s; }
-        .bubble6 { width: 16px; height: 16px; left: 90%; top: 100%; animation-duration: 8s; animation-delay: 1.5s; }
+        .grid-line1 { width: 100%; top: 25%; }
+        .grid-line2 { width: 100%; top: 50%; }
+        .grid-line3 { width: 100%; top: 75%; }
 
-        .beaker1 { top: 10%; left: 8%; }
-        .beaker2 { top: 70%; right: 10%; }
-        .test-tube1 { top: 20%; right: 5%; }
-        .test-tube2 { bottom: 20%; left: 5%; }
-
-        @keyframes float-up {
-            0% { transform: translateY(0px) scale(0); opacity: 0; }
+        @keyframes circuit-flow {
+            0% { transform: translateX(-100%); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+            100% { transform: translateX(100vw); opacity: 0; }
         }
 
-        @keyframes bubble-brew {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(2deg); }
-            75% { transform: rotate(-2deg); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.5); opacity: 1; }
         }
 
         .container {
             text-align: center;
             background:
-                linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+                linear-gradient(145deg,
+                    rgba(52, 73, 94, 0.95) 0%,
+                    rgba(44, 62, 80, 0.98) 50%,
+                    rgba(26, 37, 47, 0.95) 100%);
             padding: 40px;
-            border-radius: 25px;
-            border: 5px solid #2d3436;
+            border-radius: 15px;
+            border: 2px solid rgba(46, 213, 115, 0.3);
             box-shadow:
-                0 0 0 3px #ff6b9d,
-                0 0 0 6px #4ecdc4,
-                0 20px 40px rgba(45, 52, 54, 0.3),
-                inset 0 0 20px rgba(255, 235, 59, 0.2);
+                0 0 30px rgba(46, 213, 115, 0.2),
+                inset 0 0 50px rgba(46, 213, 115, 0.05),
+                0 15px 35px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 10;
             max-width: 500px;
             width: 100%;
-            transform: rotate(-1deg);
-            animation: wiggle 6s ease-in-out infinite;
+            backdrop-filter: blur(10px);
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-1deg); }
-            25% { transform: rotate(1deg); }
-            50% { transform: rotate(-0.5deg); }
-            75% { transform: rotate(0.5deg); }
-        }
-
-        .container:before {
-            content: '⚗️';
+        .container::before {
+            content: '';
             position: absolute;
-            top: -20px;
-            left: -20px;
-            font-size: 2em;
-            animation: bounce 2s ease-in-out infinite;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(45deg,
+                transparent,
+                rgba(46, 213, 115, 0.4),
+                transparent,
+                rgba(149, 165, 166, 0.2),
+                transparent);
+            border-radius: 15px;
+            z-index: -1;
+            animation: border-glow 3s ease-in-out infinite;
         }
 
-        .container:after {
-            content: '🧪';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 2em;
-            animation: bounce 2s ease-in-out infinite 1s;
+        @keyframes border-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #95a5a6, #ecf0f1, #bdc3c7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(46, 213, 115, 0.3);
+            letter-spacing: 0.1em;
+        }
+
+        .logo .sc {
+            background: linear-gradient(45deg, #95a5a6 0%, #ecf0f1 30%, #2ed573 60%, #1dd1a1 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         h1 {
-            font-family: 'Fredoka One', cursive;
-            font-size: 2.8em;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8em;
+            font-weight: 700;
             margin-bottom: 10px;
-            color: #e84393;
-            text-shadow:
-                3px 3px 0px #2d3436,
-                6px 6px 10px rgba(45, 52, 54, 0.3);
-            letter-spacing: 2px;
-            transform: rotate(1deg);
+            color: #ecf0f1;
+            text-shadow: 0 0 20px rgba(46, 213, 115, 0.4);
+            letter-spacing: 0.15em;
         }
 
         h2 {
-            font-family: 'Fredoka One', cursive;
-            color: #4ecdc4;
+            font-family: 'Orbitron', monospace;
+            color: #2ed573;
             margin-bottom: 20px;
-            font-size: 1.5em;
+            font-size: 1.4em;
+            font-weight: 400;
             letter-spacing: 1px;
-            transform: rotate(-1deg);
         }
 
         p {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 15px;
-            color: #2d3436;
-            font-weight: 700;
+            color: #bdc3c7;
+            font-weight: 300;
             line-height: 1.6;
         }
 
         .error {
-            color: #e84393;
+            color: #e74c3c;
             margin: 15px 0;
             padding: 15px;
-            background: rgba(255, 107, 157, 0.1);
-            border: 3px solid #ff6b9d;
-            border-radius: 15px;
-            font-weight: bold;
-            animation: wiggle 2s ease-in-out infinite;
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid rgba(231, 76, 60, 0.3);
+            border-radius: 8px;
+            font-weight: 600;
         }
 
         input {
             width: 100%;
             padding: 15px;
             margin: 10px 0;
-            border: 3px solid #4ecdc4;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #2d3436;
+            border: 2px solid rgba(46, 213, 115, 0.3);
+            border-radius: 8px;
+            background: rgba(52, 73, 94, 0.8);
+            color: #ecf0f1;
             font-size: 16px;
-            font-family: 'Comic Neue', cursive;
-            font-weight: 700;
+            font-family: 'Exo 2', sans-serif;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: #ff6b9d;
-            box-shadow: 0 0 15px rgba(255, 107, 157, 0.4);
-            transform: scale(1.02);
+            border-color: #2ed573;
+            box-shadow: 0 0 15px rgba(46, 213, 115, 0.4);
+            background: rgba(44, 62, 80, 0.9);
+        }
+
+        input::placeholder {
+            color: #95a5a6;
         }
 
         button {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(145deg, #4ecdc4, #00b894);
-            color: #ffffff;
-            border: 3px solid #2d3436;
-            border-radius: 15px;
+            background: linear-gradient(145deg, #2ed573, #1dd1a1);
+            color: #0f1419;
+            border: none;
+            border-radius: 8px;
             font-size: 18px;
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
             cursor: pointer;
             margin-top: 15px;
-            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 8px 20px rgba(46, 213, 115, 0.3);
             transition: all 0.3s ease;
-            transform: rotate(-1deg);
+            letter-spacing: 1px;
         }
 
         button:hover {
-            background: linear-gradient(145deg, #ff6b9d, #e84393);
-            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
-            transform: scale(1.05) rotate(1deg);
+            background: linear-gradient(145deg, #1dd1a1, #2ed573);
+            box-shadow: 0 10px 25px rgba(46, 213, 115, 0.4);
+            transform: translateY(-2px);
         }
 
         .demo-info {
             margin-top: 25px;
             font-size: 14px;
             padding: 15px;
-            background: rgba(255, 230, 109, 0.3);
-            border: 2px solid #ffe66d;
-            border-radius: 15px;
-            font-weight: 700;
+            background: rgba(46, 213, 115, 0.1);
+            border: 1px solid rgba(46, 213, 115, 0.2);
+            border-radius: 8px;
+            color: #95a5a6;
         }
     </style>
 </head>
 <body>
-    <div class="lab-equipment">
-        <div class="bubble bubble1"></div>
-        <div class="bubble bubble2"></div>
-        <div class="bubble bubble3"></div>
-        <div class="bubble bubble4"></div>
-        <div class="bubble bubble5"></div>
-        <div class="bubble bubble6"></div>
-        <div class="beaker beaker1"></div>
-        <div class="beaker beaker2"></div>
-        <div class="test-tube test-tube1"></div>
-        <div class="test-tube test-tube2"></div>
+    <div class="tech-elements">
+        <div class="circuit circuit1"></div>
+        <div class="circuit circuit2"></div>
+        <div class="circuit circuit3"></div>
+        <div class="node node1"></div>
+        <div class="node node2"></div>
+        <div class="node node3"></div>
+        <div class="node node4"></div>
+        <div class="grid-line grid-line1"></div>
+        <div class="grid-line grid-line2"></div>
+        <div class="grid-line grid-line3"></div>
     </div>
 
     <div class="container">
-        <h1>Mad Scientist Lab!</h1>
-        <h2>Chamber Two Entry ⚙️</h2>
-        <p>Show your secret lab credentials to enter the bubbling chamber!</p>
+        <div class="logo"><span class="sc">SMC</span></div>
+        <h1>SMC LABORATORY</h1>
+        <h2>Chamber Two Access Portal</h2>
+        <p>Secure authentication required for system access</p>
 
-        <?php if ($error): ?>
+        <?php if (isset($error)): ?>
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
         <form method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Enter Laboratory</button>
+            <button type="submit">AUTHENTICATE</button>
         </form>
 
         <div class="demo-info">
-            <strong>Demonstration Credentials:</strong><br>
-            Chamber 2: demo2user / password<br>
-            Master Access: admin / password
+            <strong>Demo Credentials:</strong><br>
+            Username: demo2user | Password: demo2pass<br>
+            Username: admin | Password: adminpass
         </div>
     </div>
 </body>
