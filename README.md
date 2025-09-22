@@ -31,6 +31,170 @@ nginx-proxy (Port 80/443)
     └── PostgreSQL Database
 ```
 
+## 🐳 Docker Topology
+
+### Container Network Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                            HOST SYSTEM                              │
+│  ┌─────────────────────────────────────────────────────────────────┐ │
+│  │                    DOCKER BRIDGE NETWORK                       │ │
+│  │                                                                 │ │
+│  │  ┌──────────────────┐    ┌──────────────────┐                  │ │
+│  │  │   nginx-proxy    │    │nginx-proxy-comp │                  │ │
+│  │  │  ┌─────────────┐ │    │  ┌─────────────┐ │                  │ │
+│  │  │  │   Port 80   │◄┼────┼──┤Let's Encrypt│ │                  │ │
+│  │  │  │   Port 443  │ │    │  │  SSL Certs  │ │                  │ │
+│  │  │  └─────────────┘ │    │  └─────────────┘ │                  │ │
+│  │  └──────────────────┘    └──────────────────┘                  │ │
+│  │           │                                                     │ │
+│  │           ▼ Domain Routing                                      │ │
+│  │  ┌──────────────┬──────────────┬──────────────┬──────────────┐ │ │
+│  │  │    demo1     │    demo2     │    demo3     │    demo4     │ │ │
+│  │  │ ┌──────────┐ │ ┌──────────┐ │ ┌──────────┐ │ ┌──────────┐ │ │ │
+│  │  │ │   Nginx  │ │ │   Nginx  │ │ │   Nginx  │ │ │   Nginx  │ │ │ │
+│  │  │ │ Port 80  │ │ │ Port 80  │ │ │ Port 80  │ │ │ Port 80  │ │ │ │
+│  │  │ └────┬─────┘ │ │ └────┬─────┘ │ │ └────┬─────┘ │ │ └────┬─────┘ │ │ │
+│  │  │      ▼       │ │      ▼       │ │      ▼       │ │      ▼       │ │ │
+│  │  │ ┌──────────┐ │ │ ┌──────────┐ │ │ ┌──────────┐ │ │ ┌──────────┐ │ │ │
+│  │  │ │ PHP-FPM  │ │ │ │ PHP-FPM  │ │ │ │ PHP-FPM  │ │ │ │ PHP-FPM  │ │ │ │
+│  │  │ │ Port 9000│ │ │ │ Port 9000│ │ │ │ Port 9000│ │ │ │ Port 9000│ │ │ │
+│  │  │ └──────────┘ │ │ └──────────┘ │ │ └──────────┘ │ │ └──────────┘ │ │ │
+│  │  └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ │ │
+│  │           │              │              │              │             │ │
+│  │           └──────────────┼──────────────┼──────────────┘             │ │
+│  │                          ▼              ▼                            │ │
+│  │                    ┌─────────────────────────┐                       │ │
+│  │                    │     PostgreSQL DB      │                       │ │
+│  │                    │ ┌─────────────────────┐ │                       │ │
+│  │                    │ │    Port 5432        │ │                       │ │
+│  │                    │ │   Database: labsites│ │                       │ │
+│  │                    │ │   User: postgres    │ │                       │ │
+│  │                    │ └─────────────────────┘ │                       │ │
+│  │                    └─────────────────────────┘                       │ │
+│  └─────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### Container Details
+
+| Container | Image | Ports | Networks | Volumes | Purpose |
+|-----------|-------|-------|----------|---------|---------|
+| **nginx-proxy** | `nginxproxy/nginx-proxy:latest` | 80:80, 443:443 | bridge | `/var/run/docker.sock`, `/etc/nginx/certs` | Reverse proxy & SSL termination |
+| **nginx-proxy-companion** | `nginxproxy/acme-companion:latest` | - | bridge | `/var/run/docker.sock`, `/etc/nginx/certs`, `/etc/nginx/vhost.d` | Let's Encrypt automation |
+| **demo1** | `php:8.1-fpm` + custom | - | bridge | `./demo1:/var/www/html` | SMC Tech Lab 1 |
+| **demo2** | `php:8.1-fpm` + custom | - | bridge | `./demo2:/var/www/html` | SMC Tech Lab 2 |
+| **demo3** | `php:8.1-fpm` + custom | - | bridge | `./demo3:/var/www/html` | SMC Tech Lab 3 |
+| **demo4** | `php:8.1-fpm` + custom | - | bridge | `./demo4:/var/www/html` | SMC Tech Lab 4 |
+| **postgres** | `postgres:13` | - | bridge | `postgres_data:/var/lib/postgresql/data`, `./database:/docker-entrypoint-initdb.d` | Authentication database |
+
+### Network Flow
+
+#### 1. **External Request Flow**
+```
+Internet → Domain (demo1.smclab.net) → nginx-proxy:443 → SSL Termination →
+Backend Routing → demo1:80 → nginx → PHP-FPM:9000 → PostgreSQL:5432
+```
+
+#### 2. **SSL Certificate Management**
+```
+nginx-proxy-companion → Let's Encrypt API → Certificate Generation →
+Volume Mount → nginx-proxy → HTTPS Serving
+```
+
+#### 3. **Database Connections**
+```
+demo[1-4] containers → PostgreSQL:5432 → labsites database →
+User Authentication → Session Management
+```
+
+### Docker Compose Services
+
+#### **Proxy Layer**
+```yaml
+nginx-proxy:
+  image: nginxproxy/nginx-proxy:latest
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+    - certs:/etc/nginx/certs
+    - vhost:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+
+nginx-proxy-companion:
+  image: nginxproxy/acme-companion:latest
+  environment:
+    - DEFAULT_EMAIL=da@madbox.co.uk
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - certs:/etc/nginx/certs
+    - vhost:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+    - acme:/etc/acme.sh
+```
+
+#### **Application Layer**
+```yaml
+demo1:
+  build: ./demo1
+  environment:
+    - VIRTUAL_HOST=demo1.smclab.net
+    - LETSENCRYPT_HOST=demo1.smclab.net
+    - LETSENCRYPT_EMAIL=da@madbox.co.uk
+  volumes:
+    - ./demo1:/var/www/html
+  depends_on:
+    - postgres
+```
+
+#### **Data Layer**
+```yaml
+postgres:
+  image: postgres:13
+  environment:
+    - POSTGRES_DB=labsites
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=labpassword123
+  volumes:
+    - postgres_data:/var/lib/postgresql/data
+    - ./database:/docker-entrypoint-initdb.d
+```
+
+### Volume Management
+
+| Volume | Type | Mount Point | Purpose |
+|--------|------|-------------|---------|
+| `certs` | Named | `/etc/nginx/certs` | SSL certificates storage |
+| `vhost` | Named | `/etc/nginx/vhost.d` | Virtual host configurations |
+| `html` | Named | `/usr/share/nginx/html` | Challenge files for Let's Encrypt |
+| `acme` | Named | `/etc/acme.sh` | ACME client data |
+| `postgres_data` | Named | `/var/lib/postgresql/data` | Database persistent storage |
+| `./demo[1-4]` | Bind | `/var/www/html` | Application source code |
+| `./database` | Bind | `/docker-entrypoint-initdb.d` | Database initialization scripts |
+
+### Security Architecture
+
+#### **Network Isolation**
+- All containers run on isolated Docker bridge network
+- Only nginx-proxy exposes ports to host system (80, 443)
+- Internal container communication via container names
+- PostgreSQL not accessible from external network
+
+#### **SSL/TLS Security**
+- Automatic Let's Encrypt certificate generation
+- HTTPS-only access (HTTP redirects to HTTPS)
+- Certificate auto-renewal every 90 days
+- Modern TLS protocols and ciphers
+
+#### **Application Security**
+- PHP-FPM runs as non-root user
+- Database credentials stored in environment variables
+- Session-based authentication with secure tokens
+- SQL injection protection via prepared statements
+
 ## 🚀 Quick Start
 
 ### Prerequisites
