@@ -74,7 +74,7 @@ nginx-proxy (Port 80/443)
 ### nginx-proxy-companion
 - **Image**: `nginxproxy/acme-companion:latest`
 - **Function**: Let's Encrypt SSL automation
-- **Email**: `da@madbox.co.uk`
+- **Email**: `admin@example.com`
 
 ### PostgreSQL Database
 - **Image**: `postgres:13`
