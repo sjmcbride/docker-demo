@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo2 - SMCLab.net</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        h1 { color: #fff; text-align: center; }
+        .feature-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Demo2 Website</h1>
+        <div class="feature-box">
+            <h2>Advanced Demo Site - Demo2.smclab.net</h2>
+            <p>This is the second demo website showcasing advanced features and components in our containerized environment.</p>
+
+            <h3>Advanced Features:</h3>
+            <ul>
+                <li><strong>SSL Termination:</strong> Automatic HTTPS with Let's Encrypt</li>
+                <li><strong>Load Balancing:</strong> Traefik reverse proxy</li>
+                <li><strong>Shared Database:</strong> PostgreSQL connection pool</li>
+                <li><strong>Container Orchestration:</strong> Docker Compose</li>
+            </ul>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>🎯 Performance</h3>
+                <p>Optimized Nginx<br>Alpine Linux</p>
+            </div>
+            <div class="stat-card">
+                <h3>🔒 Security</h3>
+                <p>TLS 1.3<br>Auto-renewal</p>
+            </div>
+            <div class="stat-card">
+                <h3>📊 Monitoring</h3>
+                <p>Traefik Dashboard<br>Container Logs</p>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <h3>🗄️ Database Integration</h3>
+            <p>This site connects to the same PostgreSQL database as Demo1 and Demo3.</p>
+            <p><strong>Database:</strong> demo_db | <strong>User:</strong> demo_user</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🌐 Network Architecture</h3>
+            <ul>
+                <li><a href="https://demo1.smclab.net" style="color: #fff;">Demo1.smclab.net</a> - Basic Demo</li>
+                <li><strong>Demo2.smclab.net</strong> - Advanced Demo (Current)</li>
+                <li><a href="https://demo3.smclab.net" style="color: #fff;">Demo3.smclab.net</a> - Integration Demo</li>
+                <li><a href="https://traefik.smclab.net" style="color: #fff;">Traefik Dashboard</a> - Proxy Management</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

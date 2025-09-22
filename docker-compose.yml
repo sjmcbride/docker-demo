@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - --api.dashboard=true
+      - --api.debug=true
+      - --log.level=INFO
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+      - --certificatesresolvers.myresolver.acme.email=admin@smclab.net
+      - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.smclab.net`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=myresolver"
+      - "traefik.http.routers.traefik.service=api@internal"
+    networks:
+      - web
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: demo_db
+      POSTGRES_USER: demo_user
+      POSTGRES_PASSWORD: demo_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+    ports:
+      - "5432:5432"
+
+  demo1:
+    image: nginx:alpine
+    container_name: demo1
+    restart: unless-stopped
+    volumes:
+      - ./demo1:/usr/share/nginx/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo1.rule=Host(`demo1.smclab.net`)"
+      - "traefik.http.routers.demo1.entrypoints=websecure"
+      - "traefik.http.routers.demo1.tls.certresolver=myresolver"
+      - "traefik.http.services.demo1.loadbalancer.server.port=80"
+    networks:
+      - web
+      - backend
+
+  demo2:
+    image: nginx:alpine
+    container_name: demo2
+    restart: unless-stopped
+    volumes:
+      - ./demo2:/usr/share/nginx/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo2.rule=Host(`demo2.smclab.net`)"
+      - "traefik.http.routers.demo2.entrypoints=websecure"
+      - "traefik.http.routers.demo2.tls.certresolver=myresolver"
+      - "traefik.http.services.demo2.loadbalancer.server.port=80"
+    networks:
+      - web
+      - backend
+
+  demo3:
+    image: nginx:alpine
+    container_name: demo3
+    restart: unless-stopped
+    volumes:
+      - ./demo3:/usr/share/nginx/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo3.rule=Host(`demo3.smclab.net`)"
+      - "traefik.http.routers.demo3.entrypoints=websecure"
+      - "traefik.http.routers.demo3.tls.certresolver=myresolver"
+      - "traefik.http.services.demo3.loadbalancer.server.port=80"
+    networks:
+      - web
+      - backend
+
+networks:
+  web:
+    external: false
+  backend:
+    external: false
+
+volumes:
+  postgres_data:

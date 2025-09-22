@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo1 - SMCLab.net</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        h1 { color: #fff; text-align: center; }
+        .info-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .db-status {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Demo1 Website</h1>
+        <div class="info-box">
+            <h2>Welcome to Demo1.smclab.net</h2>
+            <p>This is the first demo website in our Docker stack. It's running behind Traefik with automatic SSL certificates.</p>
+
+            <h3>Stack Information:</h3>
+            <ul>
+                <li><strong>Proxy:</strong> Traefik v3.0 with Let's Encrypt SSL</li>
+                <li><strong>Web Server:</strong> Nginx (Alpine)</li>
+                <li><strong>Database:</strong> PostgreSQL 15</li>
+                <li><strong>Domain:</strong> demo1.smclab.net</li>
+            </ul>
+        </div>
+
+        <div class="db-status">
+            <h3>📊 Database Connection</h3>
+            <p>Connected to shared PostgreSQL database: <strong>demo_db</strong></p>
+            <p>Database contains sample data for all three demo sites.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>🔗 Other Demo Sites</h3>
+            <ul>
+                <li><a href="https://demo2.smclab.net" style="color: #fff;">Demo2.smclab.net</a></li>
+                <li><a href="https://demo3.smclab.net" style="color: #fff;">Demo3.smclab.net</a></li>
+                <li><a href="https://traefik.smclab.net" style="color: #fff;">Traefik Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
