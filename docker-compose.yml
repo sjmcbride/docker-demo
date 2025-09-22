@@ -67,3 +67,15 @@ services:
       - ./demo3:/usr/share/nginx/html
       - ./demo3/conf/default.conf:/etc/nginx/conf.d/default.conf
     restart: unless-stopped
+
+  demo4:
+    image: nginx:alpine
+    container_name: demo4_smclab
+    environment:
+      - VIRTUAL_HOST=demo4.smclab.net
+      - LETSENCRYPT_HOST=demo4.smclab.net
+      - LETSENCRYPT_EMAIL=da@madbox.co.uk
+    volumes:
+      - ./demo4:/usr/share/nginx/html
+      - ./demo4/conf/default.conf:/etc/nginx/conf.d/default.conf
+    restart: unless-stopped
