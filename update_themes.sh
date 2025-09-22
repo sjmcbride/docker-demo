@@ -1,22 +1,7 @@
-<?php
-require_once 'config.php';
+#!/bin/bash
 
-if (isset($_GET['logout'])) {
-    logoutUser();
-}
-
-if (!isLoggedIn()) {
-    header('Location: login.php');
-    exit;
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo1 - SMCLab.net</title>
-    <style>
+# Define the modern SC theme CSS
+read -r -d '' SC_THEME << 'EOF'
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
 
         body {
@@ -200,30 +185,6 @@ if (!isLoggedIn()) {
             box-shadow: 0 0 20px rgba(46, 213, 115, 0.4);
             transform: translateY(-2px);
         }
-    </style>
-</head>
-<body>
-    <div class="tech-elements">
-        <div class="circuit circuit1"></div>
-        <div class="circuit circuit2"></div>
-        <div class="circuit circuit3"></div>
-        <div class="node node1"></div>
-        <div class="node node2"></div>
-        <div class="node node3"></div>
-        <div class="node node4"></div>
-        <div class="grid-line grid-line1"></div>
-        <div class="grid-line grid-line2"></div>
-        <div class="grid-line grid-line3"></div>
-    </div>
+EOF
 
-    <div class="container">
-        <div class="logo"><span class="sc">SC</span></div>
-        <h1>DEMO1.SMCLAB.NET</h1>
-        <p>Welcome, <span class="status"><?php echo htmlspecialchars($_SESSION['username']); ?></span></p>
-        <p>🔒 Secure Connection Established</p>
-        <p class="status">System Status: ONLINE</p>
-        <p>Advanced Authentication Protocol Active</p>
-        <p><a href="?logout=1" style="color: #fff; text-decoration: underline;">Logout</a></p>
-    </div>
-</body>
-</html>
+echo "Theme update script created. Use this CSS in each demo site."

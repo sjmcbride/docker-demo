@@ -17,18 +17,17 @@ if (!isLoggedIn()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo4 - SMCLab.net</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Comic+Neue:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
 
         body {
-            font-family: 'Comic Neue', cursive;
+            font-family: 'Exo 2', sans-serif;
             margin: 0;
             padding: 20px;
             background:
-                radial-gradient(circle at 15% 20%, #ff6b9d 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, #4ecdc4 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, #ffe66d 0%, transparent 30%),
-                linear-gradient(135deg, #a8e6cf 0%, #88d8c0 25%, #7fcdcd 50%, #81c784 75%, #aed581 100%);
-            color: #2d3436;
+                radial-gradient(circle at 20% 30%, rgba(46, 213, 115, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(46, 213, 115, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #2c3e50 50%, #1a252f 75%, #0f1419 100%);
+            color: #ecf0f1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,15 +35,9 @@ if (!isLoggedIn()) {
             align-items: center;
             position: relative;
             overflow: hidden;
-            animation: bubbleFloat 20s ease-in-out infinite;
         }
 
-        @keyframes bubbleFloat {
-            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%; }
-            50% { background-position: 10% 20%, 90% 80%, 60% 40%, 10% 10%; }
-        }
-
-        .lab-equipment {
+        .tech-elements {
             position: fixed;
             top: 0;
             left: 0;
@@ -54,186 +47,183 @@ if (!isLoggedIn()) {
             z-index: 0;
         }
 
-        .bubble {
+        .circuit {
             position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(46, 213, 115, 0.3), transparent);
+            height: 1px;
+            animation: circuit-flow linear infinite;
+        }
+
+        .node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #2ed573, #1dd1a1);
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            animation: float-up linear infinite;
+            box-shadow: 0 0 15px rgba(46, 213, 115, 0.6);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .beaker {
+        .grid-line {
             position: absolute;
-            width: 60px;
-            height: 80px;
-            background: linear-gradient(to bottom, transparent 20%, #ff6b9d 20%, #ff6b9d 80%, #e84393 100%);
-            border: 4px solid #2d3436;
-            border-radius: 0 0 20px 20px;
-            animation: bubble-brew 3s ease-in-out infinite;
+            background: linear-gradient(to right, transparent, rgba(149, 165, 166, 0.1), transparent);
+            height: 1px;
         }
 
-        .beaker:before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 20px;
-            background: transparent;
-            border: 4px solid #2d3436;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-        }
+        .circuit1 { width: 300px; top: 15%; left: 10%; animation-duration: 8s; }
+        .circuit2 { width: 200px; top: 60%; right: 15%; animation-duration: 6s; animation-delay: 2s; }
+        .circuit3 { width: 150px; bottom: 20%; left: 20%; animation-duration: 10s; animation-delay: 4s; }
 
-        .test-tube {
-            position: absolute;
-            width: 20px;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent 30%, #4ecdc4 30%, #4ecdc4 90%, #00b894 100%);
-            border: 3px solid #2d3436;
-            border-radius: 0 0 10px 10px;
-            animation: shake 2s ease-in-out infinite;
-        }
+        .node1 { top: 20%; left: 8%; animation-delay: 0s; }
+        .node2 { top: 40%; right: 12%; animation-delay: 1s; }
+        .node3 { bottom: 30%; left: 15%; animation-delay: 2s; }
+        .node4 { top: 70%; right: 25%; animation-delay: 3s; }
 
-        .bubble1 { width: 20px; height: 20px; left: 10%; top: 100%; animation-duration: 8s; animation-delay: 0s; }
-        .bubble2 { width: 15px; height: 15px; left: 20%; top: 100%; animation-duration: 6s; animation-delay: 1s; }
-        .bubble3 { width: 25px; height: 25px; left: 80%; top: 100%; animation-duration: 10s; animation-delay: 2s; }
-        .bubble4 { width: 18px; height: 18px; left: 85%; top: 100%; animation-duration: 7s; animation-delay: 0.5s; }
-        .bubble5 { width: 22px; height: 22px; left: 15%; top: 100%; animation-duration: 9s; animation-delay: 3s; }
-        .bubble6 { width: 16px; height: 16px; left: 90%; top: 100%; animation-duration: 8s; animation-delay: 1.5s; }
+        .grid-line1 { width: 100%; top: 25%; }
+        .grid-line2 { width: 100%; top: 50%; }
+        .grid-line3 { width: 100%; top: 75%; }
 
-        .beaker1 { top: 10%; left: 8%; }
-        .beaker2 { top: 70%; right: 10%; }
-        .test-tube1 { top: 20%; right: 5%; }
-        .test-tube2 { bottom: 20%; left: 5%; }
-
-        @keyframes float-up {
-            0% { transform: translateY(0px) scale(0); opacity: 0; }
+        @keyframes circuit-flow {
+            0% { transform: translateX(-100%); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+            100% { transform: translateX(100vw); opacity: 0; }
         }
 
-        @keyframes bubble-brew {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(2deg); }
-            75% { transform: rotate(-2deg); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.5); opacity: 1; }
         }
 
         .container {
             text-align: center;
             background:
-                linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
-            padding: 40px;
-            border-radius: 25px;
-            border: 5px solid #2d3436;
+                linear-gradient(145deg,
+                    rgba(52, 73, 94, 0.95) 0%,
+                    rgba(44, 62, 80, 0.98) 50%,
+                    rgba(26, 37, 47, 0.95) 100%);
+            padding: 50px;
+            border-radius: 15px;
+            border: 2px solid rgba(46, 213, 115, 0.3);
             box-shadow:
-                0 0 0 3px #ff6b9d,
-                0 0 0 6px #4ecdc4,
-                0 20px 40px rgba(45, 52, 54, 0.3),
-                inset 0 0 20px rgba(255, 235, 59, 0.2);
+                0 0 30px rgba(46, 213, 115, 0.2),
+                inset 0 0 50px rgba(46, 213, 115, 0.05),
+                0 15px 35px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 10;
             max-width: 600px;
-            transform: rotate(-1deg);
-            animation: wiggle 6s ease-in-out infinite;
+            backdrop-filter: blur(10px);
         }
 
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-1deg); }
-            25% { transform: rotate(1deg); }
-            50% { transform: rotate(-0.5deg); }
-            75% { transform: rotate(0.5deg); }
-        }
-
-        .container:before {
-            content: '⚗️';
+        .container::before {
+            content: '';
             position: absolute;
-            top: -20px;
-            left: -20px;
-            font-size: 2em;
-            animation: bounce 2s ease-in-out infinite;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(45deg,
+                transparent,
+                rgba(46, 213, 115, 0.4),
+                transparent,
+                rgba(149, 165, 166, 0.2),
+                transparent);
+            border-radius: 15px;
+            z-index: -1;
+            animation: border-glow 3s ease-in-out infinite;
         }
 
-        .container:after {
-            content: '🧪';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 2em;
-            animation: bounce 2s ease-in-out infinite 1s;
+        @keyframes border-glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #95a5a6, #ecf0f1, #bdc3c7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(46, 213, 115, 0.3);
+            letter-spacing: 0.1em;
+        }
+
+        .logo .sc {
+            background: linear-gradient(45deg, #95a5a6 0%, #ecf0f1 30%, #2ed573 60%, #1dd1a1 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         h1 {
-            font-family: 'Fredoka One', cursive;
-            font-size: 3.5em;
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5em;
+            font-weight: 700;
             margin-bottom: 20px;
-            color: #e84393;
-            text-shadow:
-                3px 3px 0px #2d3436,
-                6px 6px 10px rgba(45, 52, 54, 0.3);
-            letter-spacing: 2px;
-            transform: rotate(2deg);
+            color: #ecf0f1;
+            text-shadow: 0 0 20px rgba(46, 213, 115, 0.4);
+            letter-spacing: 0.15em;
         }
 
         p {
-            font-size: 1.4em;
+            font-size: 1.2em;
             margin-bottom: 15px;
-            color: #2d3436;
-            font-weight: 700;
-            line-height: 1.5;
+            color: #bdc3c7;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .status {
+            color: #2ed573;
+            font-weight: 600;
         }
 
         a {
-            color: #00b894;
+            color: #2ed573;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 15px;
-            background: rgba(255, 235, 59, 0.3);
+            padding: 8px 16px;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            border-radius: 8px;
+            background: rgba(46, 213, 115, 0.1);
+            display: inline-block;
         }
 
         a:hover {
-            color: #ffffff;
-            background: #e84393;
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(232, 67, 147, 0.4);
+            color: #0f1419;
+            background: #2ed573;
+            border-color: #2ed573;
+            box-shadow: 0 0 20px rgba(46, 213, 115, 0.4);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <div class="lab-equipment">
-        <div class="bubble bubble1"></div>
-        <div class="bubble bubble2"></div>
-        <div class="bubble bubble3"></div>
-        <div class="bubble bubble4"></div>
-        <div class="bubble bubble5"></div>
-        <div class="bubble bubble6"></div>
-        <div class="beaker beaker1"></div>
-        <div class="beaker beaker2"></div>
-        <div class="test-tube test-tube1"></div>
-        <div class="test-tube test-tube2"></div>
+    <div class="tech-elements">
+        <div class="circuit circuit1"></div>
+        <div class="circuit circuit2"></div>
+        <div class="circuit circuit3"></div>
+        <div class="node node1"></div>
+        <div class="node node2"></div>
+        <div class="node node3"></div>
+        <div class="node node4"></div>
+        <div class="grid-line grid-line1"></div>
+        <div class="grid-line grid-line2"></div>
+        <div class="grid-line grid-line3"></div>
     </div>
 
     <div class="container">
-        <h1>demo4.smclab.net</h1>
-        <p>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
-        <p>🌐 https://demo4.smclab.net</p>
-        <p>Secured with SSL via nginx-proxy</p>
-        <p>PHP + PostgreSQL authentication system</p>
-        <p><a href="?logout=1" style="color: #fff; text-decoration: underline;">Logout</a></p>
+        <div class="logo"><span class="sc">SC</span></div>
+        <h1>DEMO4.SMCLAB.NET</h1>
+        <p>Welcome, <span class="status"><?php echo htmlspecialchars($_SESSION['username']); ?></span></p>
+        <p>🔒 Secure Connection Established</p>
+        <p class="status">System Status: ONLINE</p>
+        <p>Advanced Authentication Protocol Active</p>
+        <p><a href="?logout=1">System Logout</a></p>
     </div>
 </body>
 </html>
