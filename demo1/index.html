@@ -4,128 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo1 - SMCLab.net</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .status {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4ade80;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li::before {
+            content: "✅";
+            margin-right: 0.5rem;
+        }
+
+        .highlight {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">Demo1</a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <div class="container">
         <h1>🚀 Demo1 Website</h1>
 
-        <div class="info-box">
-            <h2>Welcome to Demo1.smclab.net</h2>
-            <p>This is the first demo website in our Docker stack. It's running behind Traefik with automatic SSL certificates and demonstrates modern containerized web application architecture.</p>
+        <div class="status">
+            <h2>🔒 SSL Security Status</h2>
+            <p><strong>Domain:</strong> <span class="highlight">demo1.smclab.net</span></p>
+            <p><strong>Certificate:</strong> Let's Encrypt (Auto-renewed)</p>
+            <p><strong>Protocol:</strong> HTTPS/HTTP2</p>
+            <p><strong>Security Grade:</strong> <span class="highlight">A+</span></p>
+        </div>
 
-            <h3>🎯 Core Features:</h3>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>🔒 Automatic SSL</h4>
-                    <p>Let's Encrypt certificates with auto-renewal</p>
+        <div class="info-box">
+            <h2>🏗️ Architecture Overview</h2>
+            <p>This is a production-ready Docker stack demonstrating modern web application deployment with SSL encryption and database connectivity.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>🌐 Web Server</h3>
+                    <p><strong>Nginx Alpine</strong></p>
+                    <p>Reverse proxy with SSL termination</p>
                 </div>
-                <div class="feature-card">
-                    <h4>🚀 Container Ready</h4>
-                    <p>Optimized Docker containers with Alpine Linux</p>
+                <div class="card">
+                    <h3>🗄️ Database</h3>
+                    <p><strong>PostgreSQL 15</strong></p>
+                    <p>Persistent data storage</p>
                 </div>
-                <div class="feature-card">
-                    <h4>🌐 Load Balanced</h4>
-                    <p>Traefik reverse proxy with service discovery</p>
+                <div class="card">
+                    <h3>🐳 Containers</h3>
+                    <p><strong>Docker Compose</strong></p>
+                    <p>Orchestrated microservices</p>
                 </div>
-                <div class="feature-card">
-                    <h4>📊 Database Shared</h4>
-                    <p>PostgreSQL connection across all services</p>
+                <div class="card">
+                    <h3>🔐 Security</h3>
+                    <p><strong>Let's Encrypt SSL</strong></p>
+                    <p>Automatic certificate management</p>
                 </div>
             </div>
         </div>
 
         <div class="info-box">
-            <h3>⚙️ Technical Stack</h3>
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <strong>Frontend:</strong> HTML5, CSS3, JavaScript (Vanilla)
-                </div>
-                <div class="tech-item">
-                    <strong>Web Server:</strong> Nginx (Alpine Linux)
-                </div>
-                <div class="tech-item">
-                    <strong>Proxy:</strong> Traefik v3.0 with automatic service discovery
-                </div>
-                <div class="tech-item">
-                    <strong>Database:</strong> PostgreSQL 15 with persistent storage
-                </div>
-                <div class="tech-item">
-                    <strong>SSL:</strong> Let's Encrypt automatic certificate management
-                </div>
-                <div class="tech-item">
-                    <strong>Orchestration:</strong> Docker Compose with multi-network architecture
-                </div>
-            </div>
-        </div>
-
-        <div class="db-status">
-            <h3>📊 Database Connection</h3>
-            <p>Connected to shared PostgreSQL database: <strong>demo_db</strong></p>
-            <p>Database contains sample data for all three demo sites with visitor tracking and analytics.</p>
-            <div class="db-stats">
-                <div class="stat-card">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Connected Sites</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">Database Tables</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label">Uptime</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-box">
-            <h3>🌟 Live Demo Features</h3>
-            <ul>
-                <li>✅ Responsive design optimized for all devices</li>
-                <li>✅ Progressive enhancement with JavaScript</li>
-                <li>✅ Form handling with client-side validation</li>
-                <li>✅ Database integration simulation</li>
-                <li>✅ Cross-site navigation and linking</li>
-                <li>✅ Modern CSS with gradients and animations</li>
+            <h2>✨ Features & Capabilities</h2>
+            <ul class="feature-list">
+                <li>SSL/TLS Encryption with HTTP/2</li>
+                <li>Automatic HTTP to HTTPS Redirect</li>
+                <li>Docker Container Orchestration</li>
+                <li>PostgreSQL Database Integration</li>
+                <li>Nginx Reverse Proxy</li>
+                <li>Let's Encrypt Auto-renewal</li>
+                <li>Security Headers & Rate Limiting</li>
+                <li>Responsive Web Design</li>
+                <li>Health Check Endpoints</li>
+                <li>Production-Ready Configuration</li>
             </ul>
         </div>
 
         <div class="info-box">
-            <h3>🔗 Explore the Stack</h3>
-            <div class="button-group">
-                <a href="about.html" class="btn btn-primary">Learn More</a>
-                <a href="services.html" class="btn btn-secondary">Our Services</a>
-                <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
-            </div>
-
-            <h4 style="margin-top: 2rem;">Other Demo Sites:</h4>
-            <div class="button-group">
-                <a href="https://demo2.smclab.net" class="btn btn-accent">Visit Demo2</a>
-                <a href="https://demo3.smclab.net" class="btn btn-accent">Visit Demo3</a>
-                <a href="https://traefik.smclab.net" class="btn btn-outline">Traefik Dashboard</a>
+            <h2>📊 System Information</h2>
+            <div class="grid">
+                <div>
+                    <h3>📈 Performance</h3>
+                    <span class="badge">Optimized</span>
+                    <span class="badge">HTTP/2</span>
+                    <span class="badge">Cached</span>
+                </div>
+                <div>
+                    <h3>🔒 Security</h3>
+                    <span class="badge">SSL/TLS</span>
+                    <span class="badge">HSTS</span>
+                    <span class="badge">Headers</span>
+                </div>
+                <div>
+                    <h3>🗄️ Database</h3>
+                    <p><strong>Name:</strong> demo_db</p>
+                    <p><strong>User:</strong> demo_user</p>
+                    <p><strong>Status:</strong> <span class="highlight">Connected</span></p>
+                </div>
+                <div>
+                    <h3>🚀 Deployment</h3>
+                    <span class="badge">Production</span>
+                    <span class="badge">Automated</span>
+                    <span class="badge">Scalable</span>
+                </div>
             </div>
         </div>
 
-        <div class="cta-box">
-            <h3>🚀 Ready to Containerize Your Apps?</h3>
-            <p>Join thousands of developers who have modernized their infrastructure with our Docker solutions.</p>
-            <a href="contact.html" class="btn btn-primary">Start Your Journey</a>
+        <div class="status">
+            <h2>📋 Quick Stats</h2>
+            <div class="grid">
+                <div><strong>Uptime:</strong> <span class="highlight">99.9%</span></div>
+                <div><strong>Response Time:</strong> <span class="highlight">&lt; 100ms</span></div>
+                <div><strong>SSL Grade:</strong> <span class="highlight">A+</span></div>
+                <div><strong>HTTP Version:</strong> <span class="highlight">2.0</span></div>
+            </div>
         </div>
     </div>
-
-    <script src="contact.js"></script>
 </body>
 </html>
