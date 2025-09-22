@@ -15,7 +15,7 @@ if (!isLoggedIn()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo1 - SMCLab.net</title>
+    <title>SMC Tech Lab 1 - Server Rescue Missions</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
 
@@ -201,6 +201,7 @@ if (!isLoggedIn()) {
             transform: translateY(-2px);
         }
     </style>
+    <link rel="stylesheet" href="../shared/gaming.css">
 </head>
 <body>
     <div class="tech-elements">
@@ -219,11 +220,259 @@ if (!isLoggedIn()) {
     <div class="container">
         <div class="logo"><span class="sc">SMC</span></div>
         <h1>SMC TECH LAB 1</h1>
-        <p>Welcome, <span class="status"><?php echo htmlspecialchars($_SESSION['username']); ?></span></p>
-        <p>🔒 Secure Connection Established</p>
-        <p class="status">System Status: ONLINE</p>
-        <p>Advanced Authentication Protocol Active</p>
-        <p><a href="?logout=1" style="color: #fff; text-decoration: underline;">Logout</a></p>
+        <h2 style="font-family: 'Orbitron', monospace; color: #2ed573; font-size: 1.8em; margin-bottom: 30px; letter-spacing: 2px;">🚨 SERVER RESCUE MISSIONS 🚨</h2>
+
+        <div class="lab-status">
+            <p>Operator: <span class="status"><?php echo htmlspecialchars($_SESSION['username']); ?></span></p>
+            <p>🔒 Secure Connection Established</p>
+            <p class="status">Mission Control: ACTIVE</p>
+        </div>
+
+        <div class="missions-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+
+            <!-- Critical Server Down Mission -->
+            <div class="challenge-container">
+                <div class="challenge-title">🔥 Critical Server Down</div>
+                <div class="challenge-difficulty difficulty-hard">HARD DIFFICULTY</div>
+                <div class="challenge-description">
+                    Web server has crashed! Diagnose and restore service within 5 minutes.
+                </div>
+                <div class="challenge-interface">
+                    <div class="console-output" id="server-console">
+                        <div class="console-line console-error">[ERROR] nginx: [emerg] bind() to 0.0.0.0:80 failed</div>
+                        <div class="console-line console-error">[ERROR] Service unavailable - Connection refused</div>
+                        <div class="console-line console-warning">[WARN] Multiple connection timeouts detected</div>
+                        <div class="console-line console-prompt">root@server:~# </div>
+                    </div>
+                    <div class="progress-container" style="margin: 10px 0;">
+                        <div class="progress-bar danger" id="server-health" style="width: 15%;"></div>
+                    </div>
+                    <div class="challenge-controls">
+                        <button class="game-btn" onclick="startServerRescue()">🚀 START MISSION</button>
+                        <button class="game-btn secondary" onclick="showHint('server')">💡 HINT (15 XP)</button>
+                    </div>
+                </div>
+                <div class="mission-stats" style="margin-top: 15px; font-size: 14px; color: #bdc3c7;">
+                    Base Points: 200 | Time Limit: 5:00 | Success Rate: 23%
+                </div>
+            </div>
+
+            <!-- Memory Leak Detective Mission -->
+            <div class="challenge-container">
+                <div class="challenge-title">🧠 Memory Leak Detective</div>
+                <div class="challenge-difficulty difficulty-medium">MEDIUM DIFFICULTY</div>
+                <div class="challenge-description">
+                    Find the rogue process consuming excessive memory before system crashes.
+                </div>
+                <div class="challenge-interface">
+                    <div id="memory-monitor" style="background: #0f1419; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; color: #2ed573;">
+                        <div>Memory Usage: <span id="memory-usage" style="color: #e74c3c;">87%</span></div>
+                        <div>Available: <span id="memory-available">2.1GB</span></div>
+                        <div>Critical Threshold: <span style="color: #f39c12;">90%</span></div>
+                        <div style="margin-top: 10px; color: #bdc3c7;">Scanning processes...</div>
+                    </div>
+                    <div class="progress-container" style="margin: 10px 0;">
+                        <div class="progress-bar warning" id="memory-pressure" style="width: 87%;"></div>
+                    </div>
+                    <div class="challenge-controls">
+                        <button class="game-btn" onclick="startMemoryHunt()">🔍 INVESTIGATE</button>
+                        <button class="game-btn secondary" onclick="showHint('memory')">💡 HINT (15 XP)</button>
+                    </div>
+                </div>
+                <div class="mission-stats" style="margin-top: 15px; font-size: 14px; color: #bdc3c7;">
+                    Base Points: 150 | Time Limit: 3:00 | Success Rate: 67%
+                </div>
+            </div>
+
+            <!-- Performance Optimizer Mission -->
+            <div class="challenge-container">
+                <div class="challenge-title">⚡ Performance Optimizer</div>
+                <div class="challenge-difficulty difficulty-medium">MEDIUM DIFFICULTY</div>
+                <div class="challenge-description">
+                    Optimize server response time to under 2 seconds for peak efficiency.
+                </div>
+                <div class="challenge-interface">
+                    <div id="performance-dashboard" style="background: #0f1419; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px;">
+                        <div style="color: #2ed573;">Current Response Time: <span id="response-time" style="color: #e74c3c; font-weight: bold;">4.7s</span></div>
+                        <div style="color: #2ed573;">Target: <span style="color: #2ed573; font-weight: bold;">&lt;2.0s</span></div>
+                        <div style="color: #f39c12; margin-top: 10px;">Performance Issues Detected:</div>
+                        <div style="color: #bdc3c7; margin-left: 20px;">• Database query optimization needed</div>
+                        <div style="color: #bdc3c7; margin-left: 20px;">• Cache configuration missing</div>
+                        <div style="color: #bdc3c7; margin-left: 20px;">• Static file compression disabled</div>
+                    </div>
+                    <div class="progress-container" style="margin: 10px 0;">
+                        <div class="progress-bar danger" id="performance-score" style="width: 35%;"></div>
+                    </div>
+                    <div class="challenge-controls">
+                        <button class="game-btn" onclick="startOptimization()">🚀 OPTIMIZE</button>
+                        <button class="game-btn secondary" onclick="showHint('performance')">💡 HINT (15 XP)</button>
+                    </div>
+                </div>
+                <div class="mission-stats" style="margin-top: 15px; font-size: 14px; color: #bdc3c7;">
+                    Base Points: 100 | Time Limit: 4:00 | Success Rate: 45%
+                </div>
+            </div>
+
+        </div>
+
+        <div class="lab-controls" style="margin: 30px 0; padding: 20px; background: rgba(52, 73, 94, 0.4); border-radius: 8px; border: 1px solid #34495e;">
+            <h3 style="font-family: 'Orbitron', monospace; color: #2ed573; margin-bottom: 15px;">🎮 Lab Controls</h3>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="game-btn secondary" onclick="viewLeaderboard()">🏆 LEADERBOARD</button>
+                <button class="game-btn secondary" onclick="viewAchievements()">🎯 ACHIEVEMENTS</button>
+                <button class="game-btn secondary" onclick="viewProfile()">👤 PROFILE</button>
+                <a href="?logout=1" class="game-btn danger" style="text-decoration: none;">🚪 LOGOUT</a>
+            </div>
+        </div>
     </div>
+
+    <script src="../shared/gaming.js"></script>
+    <script>
+        // Lab 1 specific gaming logic
+
+        function startServerRescue() {
+            gaming.startChallenge('server_down_critical', 300); // 5 minutes
+
+            // Simulate server rescue scenario
+            const console = document.getElementById('server-console');
+            const healthBar = document.getElementById('server-health');
+
+            setTimeout(() => {
+                console.innerHTML += '<div class="console-line console-prompt">Checking service status...</div>';
+            }, 1000);
+
+            setTimeout(() => {
+                console.innerHTML += '<div class="console-line console-success">[INFO] Identified port conflict on :80</div>';
+                healthBar.style.width = '35%';
+            }, 3000);
+
+            setTimeout(() => {
+                console.innerHTML += '<div class="console-line console-success">[INFO] Killing conflicting process...</div>';
+                healthBar.style.width = '60%';
+            }, 5000);
+
+            setTimeout(() => {
+                console.innerHTML += '<div class="console-line console-success">[SUCCESS] nginx service restored!</div>';
+                healthBar.style.width = '100%';
+                healthBar.className = 'progress-bar'; // Remove danger class
+                gaming.completeChallenge(true, 200);
+            }, 7000);
+        }
+
+        function startMemoryHunt() {
+            gaming.startChallenge('memory_leak_hunt', 180); // 3 minutes
+
+            const monitor = document.getElementById('memory-monitor');
+            const pressureBar = document.getElementById('memory-pressure');
+
+            setTimeout(() => {
+                monitor.innerHTML += '<div style="color: #2ed573;">Scanning process list...</div>';
+            }, 1000);
+
+            setTimeout(() => {
+                monitor.innerHTML += '<div style="color: #f39c12;">Found suspicious process: chrome_helper (2.3GB)</div>';
+                document.getElementById('memory-usage').textContent = '89%';
+                pressureBar.style.width = '89%';
+            }, 3000);
+
+            setTimeout(() => {
+                monitor.innerHTML += '<div style="color: #2ed573;">Terminating rogue process...</div>';
+                document.getElementById('memory-usage').textContent = '34%';
+                document.getElementById('memory-available').textContent = '10.8GB';
+                pressureBar.style.width = '34%';
+                pressureBar.className = 'progress-bar'; // Remove warning class
+                gaming.completeChallenge(true, 150);
+            }, 5000);
+        }
+
+        function startOptimization() {
+            gaming.startChallenge('performance_tuning', 240); // 4 minutes
+
+            const dashboard = document.getElementById('performance-dashboard');
+            const scoreBar = document.getElementById('performance-score');
+
+            setTimeout(() => {
+                dashboard.innerHTML += '<div style="color: #2ed573; margin-top: 10px;">Enabling query cache...</div>';
+                document.getElementById('response-time').textContent = '3.2s';
+                document.getElementById('response-time').style.color = '#f39c12';
+                scoreBar.style.width = '50%';
+                scoreBar.className = 'progress-bar warning';
+            }, 2000);
+
+            setTimeout(() => {
+                dashboard.innerHTML += '<div style="color: #2ed573;">Optimizing database queries...</div>';
+                document.getElementById('response-time').textContent = '2.1s';
+                scoreBar.style.width = '75%';
+            }, 4000);
+
+            setTimeout(() => {
+                dashboard.innerHTML += '<div style="color: #2ed573;">Enabling gzip compression...</div>';
+                document.getElementById('response-time').textContent = '1.3s';
+                document.getElementById('response-time').style.color = '#2ed573';
+                scoreBar.style.width = '100%';
+                scoreBar.className = 'progress-bar'; // Remove warning class
+                gaming.completeChallenge(true, 100);
+            }, 6000);
+        }
+
+        function showHint(type) {
+            if (!gaming.addHint(15)) {
+                alert('Not enough XP for hint! Complete challenges to earn more.');
+                return;
+            }
+
+            const hints = {
+                server: 'Check if another service is already using port 80. Use: netstat -tulpn | grep :80',
+                memory: 'Look for processes with high RSS memory usage. Use: ps aux --sort=-%mem | head',
+                performance: 'Start with database optimization, then caching, then compression.'
+            };
+
+            gaming.showNotification(`Hint: ${hints[type]}`);
+        }
+
+        function viewLeaderboard() {
+            gaming.showNotification('Leaderboard feature coming soon!');
+        }
+
+        function viewAchievements() {
+            gaming.showNotification('Achievement gallery coming soon!');
+        }
+
+        function viewProfile() {
+            gaming.showNotification('Player profile coming soon!');
+        }
+
+        // Update memory usage simulation
+        setInterval(() => {
+            const usage = document.getElementById('memory-usage');
+            if (usage && !gaming.currentChallenge) {
+                const current = parseInt(usage.textContent);
+                const newUsage = Math.max(75, Math.min(89, current + Math.random() * 4 - 2));
+                usage.textContent = Math.round(newUsage) + '%';
+
+                const pressureBar = document.getElementById('memory-pressure');
+                if (pressureBar) {
+                    pressureBar.style.width = newUsage + '%';
+                }
+            }
+        }, 2000);
+
+        // Update response time simulation
+        setInterval(() => {
+            const responseTime = document.getElementById('response-time');
+            if (responseTime && !gaming.currentChallenge) {
+                const current = parseFloat(responseTime.textContent);
+                const newTime = Math.max(3.5, Math.min(5.5, current + Math.random() * 0.6 - 0.3));
+                responseTime.textContent = newTime.toFixed(1) + 's';
+
+                const scoreBar = document.getElementById('performance-score');
+                if (scoreBar) {
+                    const score = Math.max(0, 100 - (newTime - 1) * 25);
+                    scoreBar.style.width = score + '%';
+                }
+            }
+        }, 3000);
+
+    </script>
 </body>
 </html>

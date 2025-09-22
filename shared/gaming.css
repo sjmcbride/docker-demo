@@ -1,0 +1,580 @@
+/* SMC Tech Labs - Gaming System Styles */
+
+/* HUD Container */
+#game-hud {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-family: 'Orbitron', monospace;
+    user-select: none;
+}
+
+.hud-container {
+    background: rgba(15, 20, 25, 0.95);
+    border: 2px solid #2ed573;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 30px rgba(46, 213, 115, 0.3);
+    backdrop-filter: blur(10px);
+    min-width: 300px;
+}
+
+/* Player Info Section */
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, #2ed573, #1dd1a1);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(46, 213, 115, 0.5);
+}
+
+.level-number {
+    font-size: 18px;
+    font-weight: 900;
+    color: #0f1419;
+    line-height: 1;
+}
+
+.level-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0f1419;
+    line-height: 1;
+}
+
+.xp-bar {
+    flex: 1;
+    background: rgba(52, 73, 94, 0.8);
+    border-radius: 15px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #34495e;
+}
+
+.xp-fill {
+    background: linear-gradient(90deg, #2ed573, #1dd1a1);
+    height: 100%;
+    transition: width 0.5s ease;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.xp-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ecf0f1;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.rank-display {
+    color: #2ed573;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Game Stats */
+.game-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(52, 73, 94, 0.6);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #34495e;
+}
+
+.stat-icon {
+    font-size: 16px;
+}
+
+.stat-value {
+    color: #ecf0f1;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* Challenge Timer */
+.challenge-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(231, 76, 60, 0.8);
+    border: 2px solid #e74c3c;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    animation: pulse 2s infinite;
+}
+
+.challenge-timer.timer-warning {
+    animation: urgent-pulse 0.5s infinite;
+    background: rgba(231, 76, 60, 0.9);
+}
+
+.timer-icon {
+    font-size: 18px;
+}
+
+.timer-value {
+    color: #ecf0f1;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+/* Sound Toggle */
+#sound-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.sound-btn {
+    background: rgba(15, 20, 25, 0.95);
+    border: 2px solid #2ed573;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(46, 213, 115, 0.3);
+}
+
+.sound-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(46, 213, 115, 0.5);
+}
+
+/* Achievement Notifications */
+#achievement-notifications {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.achievement-notification {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    border: 3px solid #d35400;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 30px rgba(243, 156, 18, 0.5);
+    animation: achievementSlideIn 0.5s ease-out;
+    min-width: 300px;
+}
+
+.achievement-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.achievement-icon {
+    font-size: 40px;
+    animation: bounce 2s infinite;
+}
+
+.achievement-text {
+    flex: 1;
+}
+
+.achievement-title {
+    color: #0f1419;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.achievement-name {
+    color: #0f1419;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.achievement-points {
+    color: #8b4513;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+/* Floating Text Animations */
+.floating-text {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    animation: floatUp 2s ease-out forwards;
+}
+
+.success-animation {
+    color: #2ed573;
+    text-shadow: 0 0 10px rgba(46, 213, 115, 0.8);
+}
+
+.failure-animation {
+    color: #e74c3c;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.8);
+}
+
+.timeout-animation {
+    color: #f39c12;
+    text-shadow: 0 0 10px rgba(243, 156, 18, 0.8);
+}
+
+.levelup-animation {
+    color: #9b59b6;
+    text-shadow: 0 0 15px rgba(155, 89, 182, 0.8);
+    font-size: 32px;
+}
+
+/* Level Up Flash Effect */
+.level-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(46, 213, 115, 0.3) 0%, transparent 70%);
+    z-index: 5000;
+    pointer-events: none;
+    animation: flashEffect 0.5s ease-out;
+}
+
+/* Game Notifications */
+.game-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: rgba(52, 152, 219, 0.95);
+    color: #ecf0f1;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 2px solid #3498db;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    z-index: 1500;
+    animation: notificationSlide 0.3s ease-out;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Challenge Interface Styles */
+.challenge-container {
+    background: rgba(15, 20, 25, 0.95);
+    border: 2px solid #2ed573;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 0 30px rgba(46, 213, 115, 0.3);
+}
+
+.challenge-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 900;
+    color: #2ed573;
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(46, 213, 115, 0.4);
+    letter-spacing: 2px;
+}
+
+.challenge-description {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 18px;
+    color: #bdc3c7;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.challenge-difficulty {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.difficulty-easy {
+    background: rgba(46, 213, 115, 0.2);
+    color: #2ed573;
+    border: 1px solid #2ed573;
+}
+
+.difficulty-medium {
+    background: rgba(243, 156, 18, 0.2);
+    color: #f39c12;
+    border: 1px solid #f39c12;
+}
+
+.difficulty-hard {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+.challenge-interface {
+    background: rgba(52, 73, 94, 0.4);
+    border: 1px solid #34495e;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.challenge-controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.game-btn {
+    background: linear-gradient(135deg, #2ed573, #1dd1a1);
+    border: none;
+    color: #0f1419;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(46, 213, 115, 0.3);
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 213, 115, 0.4);
+}
+
+.game-btn:active {
+    transform: translateY(0);
+}
+
+.game-btn.secondary {
+    background: linear-gradient(135deg, #95a5a6, #bdc3c7);
+    color: #2c3e50;
+}
+
+.game-btn.danger {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #ecf0f1;
+}
+
+/* Progress Bars */
+.progress-container {
+    background: rgba(52, 73, 94, 0.6);
+    border-radius: 10px;
+    height: 20px;
+    margin: 15px 0;
+    overflow: hidden;
+    border: 1px solid #34495e;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #2ed573, #1dd1a1);
+    transition: width 0.3s ease;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.progress-bar.danger {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.progress-bar.warning {
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+}
+
+/* Terminal/Console Styles */
+.console-output {
+    background: #0f1419;
+    border: 2px solid #2ed573;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #2ed573;
+    height: 300px;
+    overflow-y: auto;
+    margin: 20px 0;
+}
+
+.console-line {
+    margin-bottom: 5px;
+}
+
+.console-prompt {
+    color: #1dd1a1;
+}
+
+.console-error {
+    color: #e74c3c;
+}
+
+.console-warning {
+    color: #f39c12;
+}
+
+.console-success {
+    color: #2ed573;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes urgent-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -150px) scale(1.2);
+    }
+}
+
+@keyframes achievementSlideIn {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes notificationSlide {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes flashEffect {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #game-hud {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+
+    .hud-container {
+        min-width: auto;
+        padding: 10px;
+    }
+
+    .player-info {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .level-badge {
+        width: 50px;
+        height: 50px;
+    }
+
+    .game-stats {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .achievement-notification {
+        min-width: auto;
+        max-width: calc(100vw - 40px);
+    }
+
+    .challenge-container {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .challenge-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+}
