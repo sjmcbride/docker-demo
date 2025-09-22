@@ -2,7 +2,7 @@
 // Database configuration
 define('DB_HOST', 'postgres');
 define('DB_NAME', 'smclab_auth');
-define('DB_USER', 'smclab');
+define('DB_USER', 'postgres');
 define('DB_PASS', 'secure_password_123');
 define('SITE_NAME', 'demo1');
 
