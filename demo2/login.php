@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMC Laboratory - Chamber Two Access Portal</title>
+    <title>SMC Tech Lab 2 - Access Portal</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
 
@@ -274,8 +274,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container">
         <div class="logo"><span class="sc">SMC</span></div>
-        <h1>SMC LABORATORY</h1>
-        <h2>Chamber Two Access Portal</h2>
+        <h1>SMC TECH LAB 2</h1>
+        <h2>Access Portal</h2>
         <p>Secure authentication required for system access</p>
 
         <?php if (isset($error)): ?>
